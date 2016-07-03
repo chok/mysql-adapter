@@ -76,6 +76,7 @@ describe('basic-query-mysql', function () {
       should.not.exists(err);
       users.should.have.lengthOf(2);
       users.should.be.instanceOf(Array);
+      console.log(users);
       users.pop().should.be.a.Number;
       done();
     });
@@ -100,13 +101,14 @@ describe('basic-query-mysql', function () {
     UserData.all({
       where : {
         name : {
-          like : '%Len%'
+          like : '%cCa%'
         }
       }
     }, function (err, users) {
       should.exists(users);
       should.not.exists(err);
       users.should.have.lengthOf(1);
+      users[0].name.should.equal('Paul McCartney');
       done();
     });
   });
@@ -183,16 +185,6 @@ describe('basic-query-mysql', function () {
     });
   });
 
-  it('should query collection using Where operation', function (done) {
-
-        try{
-            UserData.all({where : {} },function(err,users){});
-        }catch( e){
-          assert.equal(e.message, 'Where field is empty', 'Where field cannot be empty');
-          done(); 
-        }
-
-  });
 });  
 
 
